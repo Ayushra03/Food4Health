@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <h1>Data Display</h1>
+    <h1>Customized Food Addition</h1>
     <div class="card-container">
         <div class="card-cat btn-container">
             <div id="categoryContainer">
@@ -37,20 +37,20 @@
             </div>
         </div>
     
-        <h1>Total Calorie Requirement: <span id="totalCalorie">{{ calorie }}</span> cal</h1>
+        <h1>Total Calories Remaining: <span id="totalCalorie">{{ calorie }}</span> cal</h1>
         <!-- <button id="subtractCaloriesBtn">Subtract Calories</button> -->
 
         <div class="btn-container">
-            <button id="subtractCaloriesBtn">Subtract Calories</button>
-            <button id="showSubtractedListBtn">Show Subtracted List</button>
+            <button id="subtractCaloriesBtn">Add Item</button>
+            <button id="showSubtractedListBtn">Show Added List</button>
         </div>
         <div id="subtractedFoodListContainer" style="display: none;">
-            <h2>Subtracted Food List:</h2>
+            <h2>Added Food List[per 100gms]</h2>
             <div id="subtractedFoodList"></div>
         </div>
     
     </div>
-    <!-- <button id="downloadPdfBtn">Download</button> -->
+    <button id="downloadPdfBtn">Download PDF</button>
 
 
     <a href="/" class="redirect-btn"><i class="fa-solid fa-house"></i></a>
@@ -60,9 +60,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <script>
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js';
+            script.onload = function() {
+                console.log('jsPDF library loaded successfully from CDN.');
+            };
+            script.onerror = function() {
+                console.error('Failed to load jsPDF library from CDN, loading from local fallback.');
+                var localScript = document.createElement('script');
+                localScript.src = '/static/js/jspdf.umd.min.js'; // Update the path to your local jsPDF file
+                document.head.appendChild(localScript);
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
 
 
     
 
 </body>
 </html>
+

@@ -103,22 +103,98 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 
-    // Add event listener to the download PDF button
-    function downloadPdf() {
-        const doc = new jsPDF();
-        const subtractedFoodListItems = Array.from(subtractedItems);
-        // Add each subtracted food item to the PDF
-        subtractedFoodListItems.forEach((foodName, index) => {
-            doc.text(10, 10 + index * 10, foodName);
-        });
-        // Save the PDF
-        doc.save('subtracted_food_list.pdf');
-    }
-
-    // Attach event listener to the download PDF button
+    // // Add event listener to the download PDF button
+    // function downloadPdf() {
+    //     const doc = new jsPDF();
+    //     const subtractedFoodListItems = Array.from(subtractedItems);
+    //     // Add each subtracted food item to the PDF
+    //     subtractedFoodListItems.forEach((foodName, index) => {
+    //         doc.text(10, 10 + index * 10, foodName);
+    //     });
+    //     // Save the PDF
+    //     doc.save('subtracted_food_list.pdf');
+    // }
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
-    downloadPdfBtn.addEventListener('click', downloadPdf);
-   
+
+            downloadPdfBtn.addEventListener('click', async () => {
+                // Ensure that jsPDF is defined
+                if (window.jspdf && window.jspdf.jsPDF) {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    doc.setFontSize(50);
+                    doc.setTextColor(150, 150, 150);
+
+                    doc.text('Food4Health', doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() / 2, {
+                        angle: 45,
+                        align: 'center',
+                        opacity: 0.01
+                    });
+
+                    const now = new Date();
+                    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+                    const formattedTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+                    doc.setFontSize(12);
+                    doc.setTextColor(0, 0, 0);
+                    doc.text(`Date: ${formattedDate}`, 10, 10);
+                    doc.text(`Time: ${formattedTime}`, 10, 20);
+
+                    const startYPosition = 30;
+                    // doc.rect(10, startYPosition, pageWidth - 20, 10, 'F');
+                    doc.setFontSize(16);
+                    doc.text('Added Food List(per 100gms)', 10, startYPosition);
+                    
+                    doc.setFontSize(12);
+                    let currentY = startYPosition + 10;
+
+                    // Add table header
+                    // doc.text('S.No', 10, currentY);
+                    // doc.text('Food Item', 30, currentY);
+                    // currentY += 10;
+                    doc.setFillColor(240, 240, 240);
+                    // doc.rect(10, currentY, pageWidth - 20, 10, 'F');
+                    doc.setDrawColor(0, 0, 0);
+                    // doc.rect(10, currentY, pageWidth - 20, 10);
+                    doc.text('S.No', 15, currentY + 7);
+                    doc.text('Food Item', 50, currentY + 7);
+                    currentY += 10;
+                    // const subtractedFoodListItems = Array.from(subtractedItems);
+                    Array.from(subtractedItems).forEach((foodName, index) => {
+                        // doc.text(`${index + 1}`, 10, currentY);
+                        // doc.text(foodName, 30, currentY);
+                        // currentY += 10;
+                        if (index % 2 === 0) {
+                            doc.setFillColor(255, 255, 255); // White background for even rows
+                        } else {
+                            doc.setFillColor(240, 240, 240); // Light gray background for odd rows
+                        }
+                        
+                        doc.text(`${index + 1}`, 15, currentY + 7);
+                        doc.text(foodName, 50, currentY + 7);
+                        currentY += 10;
+                    });
+                    const canvas = document.getElementById('caloriesPieChart');
+                    const imgData = canvas.toDataURL('image/png');
+                    doc.addPage();
+                    doc.text('Calories Pie Chart', 10, 10);
+                    doc.addImage(imgData, 'PNG', 10, 20, 150, 120); 
+                    // addWatermark(doc);
+                    doc.setFontSize(50);
+                    doc.setTextColor(150, 150, 150);
+                    doc.text('Food4Health', doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() / 2, {
+                        angle: 45,
+                        align: 'center',
+                        opacity: 0.01
+                    });
+
+
+                   
+                    doc.save('added_food_list.pdf');
+                } else {
+                    console.error('jsPDF library is not loaded properly.');
+                }
+            });
+            
+            downloadPdfBtn.addEventListener('click',downloadPdf);
 
     // Function to update the pie chart
     function updatePieChart() {

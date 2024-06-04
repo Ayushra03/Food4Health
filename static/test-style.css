@@ -47,7 +47,7 @@ h2 {
     font-size: 2rem; 
     color: var(--secondary-color); 
     margin-bottom: 15px;
-    text-align: right; 
+    text-align: center; 
 }
 
 h3 {
@@ -248,7 +248,7 @@ h3 {
     width: 100%; /* Occupy full width */
 }
 
-#subtractCaloriesBtn, #showSubtractedListBtn {
+#subtractCaloriesBtn, #showSubtractedListBtn,#downloadPdfBtn {
     display: inline-block;
     margin: 5px;
     padding: 10px 20px;
@@ -266,7 +266,7 @@ h3 {
     -moz-transition: all .4s ease-out 0s;
     transition: all .4s ease-out 0s;
 }
-#subtractCaloriesBtn:hover, #showSubtractedListBtn:hover {
+#subtractCaloriesBtn:hover, #showSubtractedListBtn:hover,#downloadPdfBtn:hover {
     background-color: var(--white-color);
     color: var(--primary-color);
 }
@@ -302,18 +302,20 @@ h3 {
     background-color: #d0d0d0; /* Darker background on hover */
 }
     
-/* #downloadPdfBtn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
+#downloadPdfBtn {
+    /* display: inline-block; */
+    margin-left: 125px;
+    padding: 10px 45px;
+    background-color:#a82c48;
+    border:3px #800000;
+    /* border-color: #800000; */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition-duration: 0.4s;
-} */
+}
 
 /* #chartContainer {
     margin-top: 20px;
