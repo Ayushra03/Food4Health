@@ -112,7 +112,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📫 **Contact**
 
-- **Author**: Ayush Raj
+- **Author**: Ayush Raj & Hassan Mandol
 - **Email**: [ayushraj8936@gmail.com]
 - **GitHub**: [Ayushra03](https://github.com/Ayushra03)
 
